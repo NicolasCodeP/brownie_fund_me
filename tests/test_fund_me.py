@@ -1,3 +1,4 @@
+""" Test fundMe Solidity contract"""
 import pytest
 from brownie import network, accounts, exceptions
 from scripts.deploy import deploy_fund_me
@@ -5,6 +6,7 @@ from scripts.helpful_scripts import get_account, LOCAL_BLOCKCHAIN_ENVIRONMENTS
 
 
 def test_can_fund_and_withdraw():
+    """Test fund and withdraw"""
     account = get_account()
     fund_me = deploy_fund_me()
     entrance_fee = fund_me.getEntranceFee() + 100
@@ -17,6 +19,7 @@ def test_can_fund_and_withdraw():
 
 
 def test_only_owner_can_withdraw():
+    """Test withdraw method"""
     if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         pytest.skip("only for local testing")
     fund_me = deploy_fund_me()
