@@ -1,8 +1,12 @@
-from brownie import FundMe, MockV3Aggregator, network, config
+""" Script to deploy contract """
+
+# pylint: disable=no-name-in-module
+from brownie import FundMe, MockV3Aggregator, config, network
+
 from scripts.helpful_scripts import (
-    get_account,
-    deploy_mocks,
     LOCAL_BLOCKCHAIN_ENVIRONMENTS,
+    deploy_mocks,
+    get_account,
 )
 
 
