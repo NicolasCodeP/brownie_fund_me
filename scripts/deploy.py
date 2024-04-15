@@ -15,7 +15,7 @@ def deploy_fund_me():
     account = get_account()
     # pass the price feed address to our fundme contract
 
-    # If we are on a persistent network like goerli, use the associted address
+    # If we are on a persistent network like goerli, use the associated address
     # otherwise, deploy mocks
     if network.show_active() not in LOCAL_BLOCKCHAIN_ENVIRONMENTS:
         price_feed_address = config["networks"][network.show_active()][
