@@ -15,6 +15,7 @@ The `FundMe` contract allows for decentralized crowdfunding, where users can con
 - Secure contribution functionality in compliance with Solidity 0.8.0's safety checks.
 - Withdrawal capability for the contract owner with reentrancy protection.
 - Contributor acknowledgement with the ability to track contributions.
+- (Added) Udpate minimum amount to make a donation
 
 ## Prerequisites
 

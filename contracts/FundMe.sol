@@ -29,6 +29,10 @@ contract FundMe {
     /// @notice Interface using AggregatorV3Interface
     AggregatorV3Interface internal ethUsdPriceFeed;
 
+    /// @notice The minimum amount to make a donation. Default is $1
+    /// @return minimumFundUSD the minimum amount to make a donation
+    uint256 public minimumFundUSD = 1 * 10 ** 18;
+
     /**
      * @notice Deploys the smart contract
      * @param _ethUsdPriceFeed The address of a proxy aggregator contract
@@ -50,9 +54,8 @@ contract FundMe {
      */
     function fund() public payable {
         // The minimum amount is set to $50 for the example
-        uint256 minimumUSD = 50 * 10 ** 18;
         require(
-            getConversionRate(msg.value) >= minimumUSD,
+            getUSDValue(msg.value) >= minimumFundUSD,
             "You need to spend more ETH!"
         );
 
@@ -92,15 +95,11 @@ contract FundMe {
     }
 
     /**
-     * @notice Converts ETH amount into USD
-     * @dev TODO
-     * NOTE 1000000000 = 1 GWEI
+     * @notice Returns value of ETH amount in USD
      * @param ethAmount the amoutn of ETH to convert
      * @return ethAmountInUsd the amount of ETH converted in USD
      */
-    function getConversionRate(
-        uint256 ethAmount
-    ) public view returns (uint256) {
+    function getUSDValue(uint256 ethAmount) public view returns (uint256) {
         uint256 ethPrice = getPrice();
         uint256 ethAmountInUsd = (ethPrice * ethAmount) / (10 ** 18);
         return ethAmountInUsd;
@@ -108,19 +107,31 @@ contract FundMe {
     }
 
     /// @notice Returns the entrance fee in Wei
-    /// @dev TODO
     /// @return entranceFee the entrance fee in Wei
     function getEntranceFee() public view returns (uint256) {
-        uint256 minimumUSD = 50 * 10 ** 18;
         uint256 price = getPrice();
         uint256 precision = 1 * 10 ** 18;
-        return (minimumUSD * precision) / price;
+        return (minimumFundUSD * precision) / price;
+    }
+
+    /// @notice Returns the entrance fee in USD
+    /// @return entranceFee the entrance fee in USD
+    function getEntranceFeeUSD() public view returns (uint256) {
+        return minimumFundUSD / (10 ** 18);
     }
 
     /// @notice Modifier requiring ownership of the contract
     modifier onlyOwner() {
         require(msg.sender == owner, "Ownership required!");
         _;
+    }
+
+    /// @notice Updates the entrance fee in USD
+    /// @return entranceFee the entrance fee in USD
+    function updateEntranceFee(
+        uint256 _minimumFundUSD
+    ) public returns (uint256) {
+        minimumFundUSD = _minimumFundUSD * (10 ** 18);
     }
 
     /// @notice Transfers funds to owner and resets amount funded
