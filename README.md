@@ -10,6 +10,9 @@ This `FundMe` smart contract project is inspired by the teachings of Patrick Col
 
 The `FundMe` contract allows for decentralized crowdfunding, where users can contribute ETH and the contract owner can withdraw the accumulated funds. This project serves as a practical example of how to build, deploy, and test a smart contract using the latest Solidity features.
 
+Live example:  
+[Contract deployed on Sepolia Testnet](https://sepolia.etherscan.io/address/0x6DDC7937AA93953CD5549c5465e5e38ABaB56Ec8)
+
 ## Features
 
 - Secure contribution functionality in compliance with Solidity 0.8.0's safety checks.
@@ -26,6 +29,21 @@ To set up and interact with this project, you'll need:
 - [Python 3.6 or later](https://www.python.org/downloads/)
   - [Brownie](https://eth-brownie.readthedocs.io/en/stable/install.html)
 - [MetaMask](https://metamask.io) with test ETH for deployment on testnets.
+
+### Sepolia testnet
+
+Sepolia testnet need to be added to [brownie network list](https://ethereum.stackexchange.com/questions/147238/infura-network-support-for-sepollia-in-brownie).  
+Update `network-config.yaml` file located at ~/USERNAME/.brownie/network-config.yaml
+
+```yaml
+- name: Sepolia (Infura)
+  chainid: 11155111
+  explorer: https://api-sepolia.etherscan.io/api
+  host: https://sepolia.infura.io/v3/$WEB3_INFURA_PROJECT_ID
+  id: sepolia
+  multicall2: '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696'
+  provider: infura
+```
 
 ## Setup
 
