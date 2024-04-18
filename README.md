@@ -94,15 +94,8 @@ brownie test
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## Contact
-
-For queries, feel free to contact me at <nicolas.peteuil@protonmail.com>.
-
 ## Acknowledgments
 
 - Patrick Collins and his educational content on Solidity and smart contract development.
 - Brownie for the powerful Ethereum development framework.
 - OpenZeppelin and Chainlink for their secure and reliable smart contract libraries.
-
-```note
- ```
